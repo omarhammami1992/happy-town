@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import com.happytown.domain.entity.Inhabitant;
 
 @Entity
 @Table(name = "Inhabitant")
@@ -18,6 +19,20 @@ public class InhabitantJpa {
     private LocalDate arrivalDate;
     private String address;
     private String gift;
+
+    public InhabitantJpa() {
+    }
+
+    public InhabitantJpa(String id, String firstName, String lastName, String email, LocalDate birthDay, LocalDate arrivalDate, String address, String gift) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDay = birthDay;
+        this.arrivalDate = arrivalDate;
+        this.address = address;
+        this.gift = gift;
+    }
 
     public String getId() {
         return id;
@@ -56,7 +71,7 @@ public class InhabitantJpa {
     }
 
     public void setBirthDay(LocalDate birthDay) {
-        this.birthDay = this.birthDay;
+        this.birthDay = birthDay;
     }
 
     public LocalDate getArrivalDate() {
@@ -83,4 +98,7 @@ public class InhabitantJpa {
         this.gift = gift;
     }
 
+    public Inhabitant toDomain() {
+        return new Inhabitant(id, email, birthDay, arrivalDate, gift);
+    }
 }
